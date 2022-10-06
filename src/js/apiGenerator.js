@@ -1,9 +1,10 @@
-
+ function apiGenerator(github) {
+    return `
 // Hero Const
 const heroImg = document.querySelector(".hero-circle_img");
 
 //User Name
-const githubUser = "Johanh0";
+const githubUser = "${github}";
 
 function apiRequest(github) {
     // Calling the API
@@ -30,4 +31,7 @@ function apiRepository(github) {
 
 apiRepository(githubUser);
 apiRequest(githubUser);
-    
+    `
+};
+
+module.exports = apiGenerator;

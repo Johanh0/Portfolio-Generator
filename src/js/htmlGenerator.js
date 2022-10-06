@@ -1,10 +1,13 @@
-<!DOCTYPE html>
+function htmlGenerator(name, github, email, description, profession) {
+
+    return `
+    <!DOCTYPE html>
 <html lang="en" class=" scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>${name} Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="./dist/output.css">
 </head>
@@ -34,7 +37,7 @@
             </div>
 
             <div class="mb-10">
-                <h1 class=" text-center text-3xl">Johan Herrera<br><span class=" text-4xl text-blue-600 font-bold">Front End Developer</span></h1>
+                <h1 class=" text-center text-3xl">${name}<br><span class=" text-4xl text-blue-600 font-bold">${profession}</span></h1>
             </div>
 
             <div class="animate-bounce">
@@ -55,10 +58,10 @@
                 <h2 class=" text-4xl mb-7 font-bold text-blue-600 ">About Me</h2>
 
                 <p class=" text-lg mb-5 text-center">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore vel facilis sit omnis distinctio eos unde cupiditate quia fugit iusto rem dicta, magnam, minus ipsum vitae consectetur quaerat alias. Nemo itaque maxime eius ad quo?
+                    ${description}
                 </p>
 
-                <a target="_blank" class="github-url1 bg-blue-600 p-4 text-white rounded-lg shadow-lg cursor-pointer hover:bg-blue-700 transition-all">
+                <a target="_blank" href="https://github.com/${github}" class="github-url1 bg-blue-600 p-4 text-white rounded-lg shadow-lg cursor-pointer hover:bg-blue-700 transition-all">
                     <i class="fa-brands fa-github"></i>
                     View Github
                 </a>
@@ -79,42 +82,15 @@
 
         <section id="projects" class="w-full p-5 mb-10">
 
-            <!-- <div class="text-4xl mb-7 font-bold text-blue-600 ">
-                <h2 class="">Portfolio</h2>
-            </div> -->
-
             <div class="table w-full lg:w-2/3 lg:m-auto shadow-lg border-2 border-solid rounded-lg p-5  ">
                 <div class="table-header-group text-2xl text-center font-bold text-blue-600 ">
                   <div class="table-row">
-                    <div class="table-cell text-left ...">Name</div>
-                    <div class="table-cell text-left ...">Commits</div>
-                    <div class="table-cell text-left ...">Stars</div>
-                    <div class="table-cell text-left ...">Repository</div>
+                    <div class="table-cell text-left">Name</div>
+                    <div class="table-cell text-left">Repository</div>
                   </div>
                 </div>
                 <div class="table-row-group text-xl ">
-                  <div class="table-row">
-                    <div class="table-cell">The Sliding Mr.</div>
-                    <div class="table-cell">Malcolm Lockyer</div>
-                    <div class="table-cell">1961</div>
-                    <div class="table-cell">
-                        <a href="" class="text-blue-600 hover:text-blue-700 transition-all">
-                            <i class="fa-brands fa-github"></i>
-                            View
-                        </a>
-                    </div>
-                  </div>
-                  <div class="table-row">
-                    <div class="table-cell">Witchy Woman</div>
-                    <div class="table-cell">The Eagles</div>
-                    <div class="table-cell">1972</div>
-                  </div>
-                  <div class="table-row">
-                    <div class="table-cell">Shining Star</div>
-                    <div class="table-cell">Earth, Wind, and Fire</div>
-                    <div class="table-cell">1975</div>
-                  </div>
-                </div>
+                  
               </div>
 
         </section>
@@ -126,9 +102,9 @@
                 </h2>
 
                 <div class=" flex lg:w-1-2 m-auto">
-                    <a href="" class=" p-5 w-40 bg-blue-600 text-gray-50 text-center rounded-lg cursor-pointer hover:bg-blue-700 transition-all">Send Email</a>
+                    <a href="mailto:${email}" class=" p-5 w-40 bg-blue-600 text-gray-50 text-center rounded-lg cursor-pointer hover:bg-blue-700 transition-all">Send Email</a>
 
-                    <a target="_blank" class="github-url2 ml-5 p-5 w-40 border-2 border-blue-600 hover:border-blue-700 text-blue-600 hover:text-blue-700 text-center rounded-lg cursor-pointer transition-all">GitHub</a>
+                    <a target="_blank" href="https://github.com/${github}" class="github-url2 ml-5 p-5 w-40 border-2 border-blue-600 hover:border-blue-700 text-blue-600 hover:text-blue-700 text-center rounded-lg cursor-pointer transition-all">GitHub</a>
                 </div>
         </section>
     </main>
@@ -136,10 +112,15 @@
     <footer class="w-full h-fit p-10 flex flex-col justify-center items-center bg-blue-600 text-xl text-white">
         <i class="fa-solid fa-code mb-2"></i>
         <h2 class=" text-2xl">
-            Johan Herrera ©
+            ${name} ©
         </h2>
     </footer>
 
     <script src="./src/js/api.js"></script>
+    <script src="./src/js/apiRepo.js"></script>
 </body>
-</html>
+</html> 
+    `
+}
+
+module.exports = htmlGenerator;

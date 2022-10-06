@@ -1,10 +1,9 @@
-
-
 // Setup requires
 const inquirer = require(`inquirer`);
 const fs = require(`fs`);
 const htmlGenerator = require(`./src/js/htmlGenerator`);
 const apiGenerator = require(`./src/js/apiGenerator`);
+const apiRepoGenerator = require(`./src/js/apiRepositoryGenerator`);
 
 
 // Empty Obj for export the data
@@ -48,6 +47,19 @@ function userData() {
         },
         {
             type: `input`,
+            name: `email`,
+            message: `What's your email?`,
+
+            validate: emailInput => {
+                if (emailInput) {
+                    return true;
+                } else {
+                    console.log(`You have to put your email`);
+                }
+            }
+        },
+        {
+            type: `input`,
             name: `description`,
             message: `Describe yourself: `,
 
@@ -59,6 +71,29 @@ function userData() {
                 }
             }
         },
+        // {
+        //     type: `checkbox`,
+        //     name: `skills`,
+        //     message: `Choose your skills: `,
+
+        //     choices: [
+        //         `HTML`, new inquirer.Separator(),
+        //         `CSS`, new inquirer.Separator(),
+        //         `JavaScript`, new inquirer.Separator(),
+        //         `Git`, new inquirer.Separator(),
+        //         `Boostrap`, new inquirer.Separator(),
+        //         `node.js`, new inquirer.Separator(),
+        //         `React`, new inquirer.Separator(),
+        //     ],
+
+        //     validate: skillInput => {
+        //         if (skillInput) {
+        //             return true;
+        //         } else {
+        //             console.log(`You have choose at least one skill`);
+        //         }
+        //     }
+        // },
         {
             type: `list`,
             name: `profession`,
@@ -68,8 +103,6 @@ function userData() {
                 `Front End Developer`, new inquirer.Separator(),
                 `Back End Developer`, new inquirer.Separator(),
                 `Full Stack Developer`, new inquirer.Separator(),
-                `iOS Developer`, new inquirer.Separator(),
-                `Androi Developer`, new inquirer.Separator()
             ],
 
             validate: nameInput => {
@@ -86,7 +119,7 @@ function userData() {
 userData().then(data => {
 
     // Destructuring
-    exportObj = { name, github, description, profession } = data;
+    exportObj = { name, github,email, description, profession } = data;
 
     console.log(github);
 
@@ -97,10 +130,19 @@ userData().then(data => {
         console.log(`Your API JS were created!`);
     });
 
-    fs.writeFile(`./index.html`, htmlGenerator(name, github, description, profession), err => {
+    fs.writeFile(`./index..html`, htmlGenerator(name,github, email, description, profession), err => {
         
         if (err) throw err;
 
         console.log(`Your web it's created!`)
     });
+
+    fs.writeFile(`./src/js/apiRepo.js`, apiRepoGenerator(github), err => {
+        
+        if (err) throw err;
+
+        console.log(`Your API Repo were created!`);
+    })
+
+    console.log(data);
 });
